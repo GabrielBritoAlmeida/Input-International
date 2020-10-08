@@ -38,7 +38,6 @@ const InputCustom = ({ list = [] }: InputProps) => {
         <S.DivFlag>
           <S.DivFlagAlign>
             <S.Image src={flagCurrent?.icon} />
-            {/* <FlagUsa className="icon-flag" /> */}
             <span>+1</span>
           </S.DivFlagAlign>
           <DownArrow className="icon-arrow" />

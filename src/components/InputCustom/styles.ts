@@ -71,24 +71,6 @@ export const DivFlag = styled.div`
   }
 `
 
-// export const InputFlag = styled.input`
-//   width: 11.4rem;
-//   height: 3.6rem;
-
-//   border: none;
-//   border-right: 0.2rem solid #004b65;
-//   background: none;
-//   padding-left: 0.5rem;
-
-//   position: absolute;
-//   top: 0.6rem;
-//   left: 0.4rem;
-
-//   :focus {
-//     outline: none;
-//   }
-// `
-
 export const Image = styled.img`
   width: 2.4rem;
   height: 1.6rem;
