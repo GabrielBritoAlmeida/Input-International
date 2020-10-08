@@ -89,4 +89,45 @@ export const DivFlag = styled.div`
 //   }
 // `
 
-export const InputSearch = styled.input``
+export const Box = styled.div`
+  width: 28rem;
+  height: 17.6rem;
+  padding: 0.8rem;
+
+  background: #00151F;
+  border: 0.2rem solid #A9DEF5;
+  border-radius: 0.8rem;
+  box-shadow: 0px 8px 24px #00AEFFA3;
+
+`
+
+export const InputSearch = styled.input`
+  width: 100%;
+  height: 4rem;
+  background: none;
+  border: none;
+  border-bottom: 0.2rem solid #4995B5;
+  color: #fff;
+  font-size: 1.6rem;
+
+  :focus {
+    outline: none;
+   }
+
+`
+
+export const List = styled.ul`
+  margin-top: 0.8rem;
+  max-height: 12rem;
+  list-style:none;
+
+  overflow: auto;
+
+  > li {
+    color: #fff;
+    font-size: 1.6rem;
+    height: 4rem;
+    padding: 0 0.8rem;
+  }
+
+`

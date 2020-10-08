@@ -22,4 +22,6 @@ Default.parameters = {
   layout: 'fullscreen'
 }
 
-Default.args = {}
+Default.args = {
+  list: [{name: 'USA'}, {name: 'USA'}, {name: 'USA'}, {name: 'USA'}]
+}
