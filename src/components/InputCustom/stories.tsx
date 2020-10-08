@@ -1,8 +1,7 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
 import InputCustom, { InputProps } from '.'
 
-import { FlagUsa } from '@styled-icons/fa-solid/FlagUsa'
-import { DownArrow } from '@styled-icons/boxicons-solid/DownArrow'
+import FlagUSA from '../../../assets/svgs/flagUSA.svg'
 
 export default {
   title: 'InputCustom',
@@ -23,5 +22,11 @@ Default.parameters = {
 }
 
 Default.args = {
-  list: [{name: 'USA'}, {name: 'USA'}, {name: 'USA'}, {name: 'USA'}]
+  list: [
+    { name: 'United State', icon: FlagUSA },
+    { name: 'Italia' },
+    { name: 'Brasil' },
+    { name: 'United Arab Emirates' },
+    { name: 'França' }
+  ]
 }

@@ -89,16 +89,22 @@ export const DivFlag = styled.div`
 //   }
 // `
 
+export const Image = styled.img`
+  width: 2.4rem;
+  height: 1.6rem;
+  margin-left: 1.6rem;
+  color: #fff;
+`
+
 export const Box = styled.div`
   width: 28rem;
   height: 17.6rem;
   padding: 0.8rem;
 
-  background: #00151F;
-  border: 0.2rem solid #A9DEF5;
+  background: #00151f;
+  border: 0.2rem solid #a9def5;
   border-radius: 0.8rem;
-  box-shadow: 0px 8px 24px #00AEFFA3;
-
+  box-shadow: 0px 8px 24px #00aeffa3;
 `
 
 export const InputSearch = styled.input`
@@ -106,20 +112,19 @@ export const InputSearch = styled.input`
   height: 4rem;
   background: none;
   border: none;
-  border-bottom: 0.2rem solid #4995B5;
+  border-bottom: 0.2rem solid #4995b5;
   color: #fff;
   font-size: 1.6rem;
 
   :focus {
     outline: none;
-   }
-
+  }
 `
 
 export const List = styled.ul`
   margin-top: 0.8rem;
   max-height: 12rem;
-  list-style:none;
+  list-style: none;
 
   overflow: auto;
 
@@ -129,5 +134,4 @@ export const List = styled.ul`
     height: 4rem;
     padding: 0 0.8rem;
   }
-
 `
