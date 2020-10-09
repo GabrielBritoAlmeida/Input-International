@@ -51,31 +51,23 @@ export const DivFlag = styled.div`
   height: 3.6rem;
 
   border-right: 0.2rem solid #004b65;
+  padding: 1.6rem;
 
   position: absolute;
   top: 0.6rem;
   left: 0.4rem;
 
   .icon-arrow {
-    width: 1.6rem;
-    height: 8rem;
+    min-width: 1.6rem;
+    min-height: 8rem;
     color: #89c3de;
-    margin: 0 1.6rem;
-  }
-
-  .icon-flag {
-    width: 2.4rem;
-    height: 1.6rem;
-    margin-left: 1.6rem;
-    color: #fff;
+    /* margin: 0 1.6rem; */
   }
 `
 
 export const Image = styled.img`
   width: 2.4rem;
   height: 1.6rem;
-  margin-left: 1.6rem;
-  color: #fff;
 `
 
 export const Box = styled.div`
@@ -109,11 +101,14 @@ export const List = styled.ul`
   list-style: none;
 
   overflow: auto;
+`
 
-  > li {
-    color: #fff;
-    font-size: 1.6rem;
-    height: 4rem;
-    padding: 0 0.8rem;
-  }
+export const ListBody = styled.li`
+  display: flex;
+  align-items: center;
+
+  color: #fff;
+  font-size: 1.6rem;
+  height: 4rem;
+  padding: 0;
 `

@@ -26,9 +26,19 @@ Default.parameters = {
 
 Default.args = {
   list: [
-    { name: 'Brasil', icon: FlagB },
-    { name: 'United Arab Emirates', icon: FlagEUA },
-    { name: 'United Kingdom', icon: FlagRU },
-    { name: 'United State', icon: FlagUSA }
+    {
+      name: 'Brasil',
+      icon: FlagB,
+      code: '55',
+      mask: '(99) 99999-9999'
+    },
+    {
+      name: 'United Arab Emirates',
+      icon: FlagEUA,
+      code: '971',
+      mask: '999 999 9999'
+    },
+    { name: 'United Kingdom', icon: FlagRU, code: '44', mask: '99999 999999' },
+    { name: 'United State', icon: FlagUSA, code: '1', mask: '(999) 999-9999' }
   ]
 }

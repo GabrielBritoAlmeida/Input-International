@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import InputMask from 'react-input-mask'
 
 import * as S from './styles'
 
@@ -11,6 +12,8 @@ export type InputProps = {
   list: Array<{
     name: string
     icon: JSX.Element
+    mask: string
+    code: string
   }>
 }
 
@@ -38,11 +41,20 @@ const InputCustom = ({ list = [] }: InputProps) => {
         <S.DivFlag>
           <S.DivFlagAlign>
             <S.Image src={flagCurrent?.icon} />
-            <span>+1</span>
+            <span>+{flagCurrent?.code}</span>
           </S.DivFlagAlign>
           <DownArrow className="icon-arrow" />
         </S.DivFlag>
-        <S.InputPhone name="phone" placeholder="123..." />
+
+        <InputMask
+          mask={flagCurrent?.mask}
+          maskChar={null}
+          // error={errors.socialNumber}
+        >
+          {(props) => (
+            <S.InputPhone name="phone" placeholder="123..." {...props} />
+          )}
+        </InputMask>
       </S.Container>
       <S.Box>
         <S.InputSearch
@@ -52,9 +64,10 @@ const InputCustom = ({ list = [] }: InputProps) => {
         />
         <S.List>
           {PreferredList.map((item) => (
-            <li key={item.name} onClick={() => setFlagCurrent(item)}>
+            <S.ListBody key={item.name} onClick={() => setFlagCurrent(item)}>
+              <S.Image src={item?.icon} />
               {item.name}
-            </li>
+            </S.ListBody>
           ))}
         </S.List>
       </S.Box>
