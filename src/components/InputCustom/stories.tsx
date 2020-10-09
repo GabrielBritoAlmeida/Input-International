@@ -1,10 +1,10 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
 import InputCustom, { InputProps } from '.'
 
-import FlagUSA from '../../assets/svgs/flagUSA.svg'
-import FlagB from '../../assets/svgs/flagB.svg'
-import FlagRU from '../../assets/svgs/flagRU.svg'
-import FlagEUA from '../../assets/svgs/flagEmirates.svg'
+import FlagUSA from '../../assets/svgs/states.png'
+import FlagB from '../../assets/svgs/brasil.png'
+import FlagRU from '../../assets/svgs/kingdom.png'
+import FlagEUA from '../../assets/svgs/emirate.png'
 
 export default {
   title: 'InputCustom',

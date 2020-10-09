@@ -1,11 +1,4 @@
-// export type SearchStringProps = {
-//   list: Array<{
-//     name: string
-//   }>
-//   _name: string
-// }
-
-const SearchString = (
+export const SearchString = (
   list: Array<{
     name: string
   }>,
@@ -36,5 +29,3 @@ const SearchString = (
 
   return name
 }
-
-export default SearchString

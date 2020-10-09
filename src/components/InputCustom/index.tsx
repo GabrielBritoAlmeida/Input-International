@@ -1,12 +1,11 @@
 import { useState, useCallback } from 'react'
 import InputMask from 'react-input-mask'
 
+import FlagB from '../../assets/svgs/brasil.png'
+
+import { SearchString } from './function'
+
 import * as S from './styles'
-
-import { FlagUsa } from '@styled-icons/fa-solid/FlagUsa'
-import { DownArrow } from '@styled-icons/boxicons-solid/DownArrow'
-
-import SearchString from './function'
 
 export type InputProps = {
   list: Array<{
@@ -17,7 +16,14 @@ export type InputProps = {
   }>
 }
 
-const InputCustom = ({ list = [] }: InputProps) => {
+const countryDafault = {
+  name: 'Brasil',
+  icon: FlagB,
+  code: '55',
+  mask: '(99) 99999-9999'
+}
+
+const InputCustom = ({ list = [countryDafault] }: InputProps) => {
   const [listCurrent, setListCurrent] = useState([])
   const [flagCurrent, setFlagCurrent] = useState({})
 
@@ -40,14 +46,18 @@ const InputCustom = ({ list = [] }: InputProps) => {
       <S.Container>
         <S.DivFlag>
           <S.DivFlagAlign>
-            <S.Image src={flagCurrent?.icon} />
-            <span>+{flagCurrent?.code}</span>
+            <S.Image
+              src={flagCurrent?.icon ? flagCurrent?.icon : countryDafault.icon}
+            />
+            <span>
+              +{flagCurrent?.code ? flagCurrent?.code : countryDafault.code}
+            </span>
           </S.DivFlagAlign>
-          <DownArrow className="icon-arrow" />
+          <S.IconArrow />
         </S.DivFlag>
 
         <InputMask
-          mask={flagCurrent?.mask}
+          mask={flagCurrent?.mask ? flagCurrent?.mask : countryDafault.mask}
           maskChar={null}
           // error={errors.socialNumber}
         >
@@ -57,11 +67,14 @@ const InputCustom = ({ list = [] }: InputProps) => {
         </InputMask>
       </S.Container>
       <S.Box>
-        <S.InputSearch
-          name="search"
-          type="text"
-          onChange={(e) => handleSearchInput(e.currentTarget.value)}
-        />
+        <S.AlignSearch>
+          <S.IconSearch />
+          <S.InputSearch
+            name="search"
+            type="text"
+            onChange={(e) => handleSearchInput(e.currentTarget.value)}
+          />
+        </S.AlignSearch>
         <S.List>
           {PreferredList.map((item) => (
             <S.ListBody key={item.name} onClick={() => setFlagCurrent(item)}>
