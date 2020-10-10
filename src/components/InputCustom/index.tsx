@@ -10,21 +10,26 @@ import * as S from './styles'
 export type InputProps = {
   list: Array<{
     name: string
-    icon: JSX.Element
+    icon: string
     mask: string
     code: string
   }>
+  typeInput?: 'default' | 'filled' | 'success' | 'error' | 'disableInput'
 }
 
-const countryDafault = {
+const countryDefault = {
   name: 'Brasil',
   icon: FlagB,
   code: '55',
   mask: '(99) 99999-9999'
 }
 
-const InputCustom = ({ list = [countryDafault] }: InputProps) => {
-  const [open, setOpen] = useState(true)
+const InputCustom = ({
+  list = [countryDefault],
+  typeInput = 'default',
+  ...props
+}: InputProps) => {
+  const [open, setOpen] = useState(false)
   const [listCurrent, setListCurrent] = useState([])
   const [flagCurrent, setFlagCurrent] = useState({})
 
@@ -45,52 +50,67 @@ const InputCustom = ({ list = [countryDafault] }: InputProps) => {
   return (
     <>
       {open && <S.CloseBox onClick={() => setOpen(false)} />}
-      <S.Wrapper>
+      <S.Wrapper {...props}>
         <S.Container>
-          <S.DivFlag onClick={() => setOpen(!open)}>
-            <S.DivFlagAlign>
+          <S.DivFlag onClick={() => setOpen(!open)} typeInput={typeInput}>
+            <S.DivFlagAlign typeInput={typeInput}>
               <S.Image
+                typeInput={typeInput}
                 src={
-                  flagCurrent?.icon ? flagCurrent?.icon : countryDafault.icon
+                  flagCurrent?.icon ? flagCurrent?.icon : countryDefault.icon
                 }
               />
               <span>
-                +{flagCurrent?.code ? flagCurrent?.code : countryDafault.code}
+                +{flagCurrent?.code ? flagCurrent?.code : countryDefault.code}
               </span>
             </S.DivFlagAlign>
-            <S.IconArrow />
+            <S.IconArrow typeInput={typeInput} />
           </S.DivFlag>
 
           <InputMask
-            mask={flagCurrent?.mask ? flagCurrent?.mask : countryDafault.mask}
+            mask={flagCurrent?.mask ? flagCurrent?.mask : countryDefault.mask}
             maskChar={null}
-            // error={errors.socialNumber}
+            typeInput={typeInput}
+            disableInput={typeInput === 'disableInput' ? true : false}
+            disabled={typeInput === 'disableInput' ? true : false}
+            name="phone"
+            placeholder="123..."
           >
             {(props) => (
-              <S.InputPhone name="phone" placeholder="123..." {...props} />
+              <S.InputPhone
+                disabled={typeInput === 'disableInput' ? true : false}
+                {...props}
+              />
             )}
           </InputMask>
         </S.Container>
 
-        <S.Box isOpen={open}>
-          <S.AlignSearch>
-            <S.IconSearch />
-            <S.InputSearch
-              name="search"
-              type="text"
-              onChange={(e) => handleSearchInput(e.currentTarget.value)}
-            />
-          </S.AlignSearch>
+        {typeInput !== 'disableInput' && (
+          <>
+            <S.Box isOpen={open}>
+              <S.AlignSearch>
+                <S.IconSearch />
+                <S.InputSearch
+                  name="search"
+                  type="text"
+                  onChange={(e) => handleSearchInput(e.currentTarget.value)}
+                />
+              </S.AlignSearch>
 
-          <S.List className="style-scroll">
-            {PreferredList.map((item) => (
-              <S.ListBody key={item.name} onClick={() => setFlagCurrent(item)}>
-                <S.Image src={item?.icon} />
-                {item.name}
-              </S.ListBody>
-            ))}
-          </S.List>
-        </S.Box>
+              <S.List className="style-scroll">
+                {PreferredList.map((item) => (
+                  <S.ListBody
+                    key={item.name}
+                    onClick={() => setFlagCurrent(item)}
+                  >
+                    <S.Image src={item?.icon} role="img" />
+                    {item.name}
+                  </S.ListBody>
+                ))}
+              </S.List>
+            </S.Box>
+          </>
+        )}
       </S.Wrapper>
     </>
   )

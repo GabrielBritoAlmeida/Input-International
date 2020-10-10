@@ -1,8 +1,40 @@
 import styled, { css } from 'styled-components'
 
 import { DownArrow } from '@styled-icons/boxicons-solid/DownArrow'
-
 import { Search } from '@styled-icons/heroicons-solid/Search'
+import { InputProps } from '.'
+
+type StyleProps = {
+  src: string
+  typeInput: string
+}
+
+const wrapperModifiers = {
+  default: () => css`
+    border: 0.2rem solid #4995b5;
+
+    :hover {
+      border: 0.2rem solid #a9def5;
+      box-shadow: 0px 0px 8px #00aeff;
+    }
+  `,
+
+  filled: () => css`
+    border: 0.2rem solid #4995b5;
+  `,
+
+  error: () => css`
+    border: 0.2rem solid #ee4d4d;
+  `,
+
+  success: () => css`
+    border: 0.2rem solid #4ddbc4;
+  `,
+
+  disableInput: () => css`
+    border: 0.2rem solid #00364d;
+  `
+}
 
 export const Wrapper = styled.div`
   padding: 3rem;
@@ -36,43 +68,43 @@ export const Wrapper = styled.div`
   }
 `
 
+export const InputPhone = styled.input<InputProps>`
+  ${({ typeInput }) => css`
+    width: 28rem;
+    height: 4.8rem;
+
+    background: none;
+    border-radius: 0.8rem;
+
+    color: #fff;
+    font-size: 1.6rem;
+
+    padding-left: 13rem;
+
+    ::placeholder {
+      text-align: start;
+      color: #004b65;
+      font-size: 1.6rem;
+    }
+
+    :focus {
+      outline: none;
+      border: 0.2rem solid #a9def5;
+    }
+
+    ${!!typeInput && wrapperModifiers[typeInput]}
+  `}
+`
+
 export const Container = styled.div`
   position: relative;
   max-width: 28.4rem;
 `
 
-export const InputPhone = styled.input`
-  width: 28rem;
-  height: 4.8rem;
-
-  background: none;
-  border: 0.2rem solid #4995b5;
-  border-radius: 0.8rem;
-  color: #fff;
-  font-size: 1.6rem;
-
-  padding-left: 13rem;
-
-  ::placeholder {
-    text-align: start;
-    color: #004b65;
-    font-size: 1.6rem;
-  }
-
-  :focus {
-    outline: none;
-    border: 0.2rem solid #a9def5;
-  }
-
-  :hover {
-    border: 0.2rem solid #a9def5;
-    box-shadow: 0px 0px 8px #00aeff;
-  }
-`
-
-export const DivFlagAlign = styled.div`
+export const DivFlagAlign = styled.div<InputProps>`
   display: flex;
   flex-direction: row;
+  opacity: ${({ typeInput }) => typeInput === 'disableInput' && 0.4};
 
   > span {
     color: #fff;
@@ -80,7 +112,7 @@ export const DivFlagAlign = styled.div`
   }
 `
 
-export const DivFlag = styled.div`
+export const DivFlag = styled.div<InputProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -91,33 +123,40 @@ export const DivFlag = styled.div`
 
   border-right: 0.2rem solid #004b65;
   padding: 1.6rem 1.4rem;
-  cursor: pointer;
 
   position: absolute;
   top: 0.6rem;
   left: 0.4rem;
+
+  ${({ typeInput }) =>
+    typeInput !== 'disableInput' &&
+    css`
+      cursor: pointer;
+      opacity: 1;
+    `}
 `
 
-export const IconArrow = styled(DownArrow)`
+export const IconArrow = styled(DownArrow)<InputProps>`
   width: 1.6rem;
   height: 0.8rem;
   color: #89c3de;
-`
-type ImageProps = {
-  icon: JSX.Element
-}
-
-export const Image = styled.img<ImageProps>`
-  width: 2.4rem;
-  height: 1.6rem;
-  margin-right: 0.8rem;
+  opacity: ${({ typeInput }) => typeInput === 'disableInput' && 0.4};
 `
 
-type BoxProps = {
-  isOpen: boolean
-}
+export const Image = styled.div<StyleProps>`
+  ${({ src, typeInput }) => css`
+    width: 2.4rem;
+    height: 1.6rem;
+    margin-right: 0.8rem;
 
-export const Box = styled.div<BoxProps>`
+    background-image: url(${src});
+    background-position: center center;
+    background-size: cover;
+    opacity: ${typeInput === 'disableInput' && 0.4};
+  `}
+`
+
+export const Box = styled.div<InputProps>`
   ${({ isOpen }) => css`
     position: fixed;
 
@@ -136,7 +175,6 @@ export const Box = styled.div<BoxProps>`
   `}
 `
 export const CloseBox = styled.div`
-  background: #333;
   opacity: 0.5;
   position: fixed;
   top: 0;
@@ -189,27 +227,24 @@ export const List = styled.ul`
 `
 
 export const ListBody = styled.li`
-  ${({ theme }) => css`
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    color: #fff;
-    font-size: 1.6rem;
-    font-weight: 700;
-    height: 4rem;
-    padding: 0;
-    font-family: ${theme.font.family};
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  height: 4rem;
+  padding: 0;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    :hover {
-      background: #89c3de;
-    }
+  :hover {
+    background: #89c3de;
+  }
 
-    :active {
-      background: #0e7291;
-    }
-  `}
+  :active {
+    background: #0e7291;
+  }
 
   ${Image} {
     margin-right: 1.2rem;
