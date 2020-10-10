@@ -1,6 +1,8 @@
 
 Project front-end design, test.
 
+I recommend running the project with `storybook`: runs storybook on `localhost:6006` for testing, so you can view the two components being developed.
+
 Github Boilerplate design as a base -> https://github.com/GabrielBritoAlmeida/Boilerplate
 
 ## What is inside?
