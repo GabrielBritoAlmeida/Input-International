@@ -82,19 +82,14 @@ const InputCustom = ({ list = [countryDafault] }: InputProps) => {
             />
           </S.AlignSearch>
 
-          <div className="style-scroll">
-            <S.List>
-              {PreferredList.map((item) => (
-                <S.ListBody
-                  key={item.name}
-                  onClick={() => setFlagCurrent(item)}
-                >
-                  <S.Image src={item?.icon} />
-                  {item.name}
-                </S.ListBody>
-              ))}
-            </S.List>
-          </div>
+          <S.List className="style-scroll">
+            {PreferredList.map((item) => (
+              <S.ListBody key={item.name} onClick={() => setFlagCurrent(item)}>
+                <S.Image src={item?.icon} />
+                {item.name}
+              </S.ListBody>
+            ))}
+          </S.List>
         </S.Box>
       </S.Wrapper>
     </>

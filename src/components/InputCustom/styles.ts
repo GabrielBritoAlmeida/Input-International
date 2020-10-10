@@ -181,8 +181,8 @@ export const InputSearch = styled.input`
 `
 
 export const List = styled.ul`
-  position: relative;
   margin-top: 0.8rem;
+  margin-right: 0.8rem;
 
   height: 11.6rem;
   list-style: none;
@@ -204,6 +204,10 @@ export const ListBody = styled.li`
 
     :hover {
       background: #89c3de;
+    }
+
+    :active {
+      background: #0e7291;
     }
   `}
 
