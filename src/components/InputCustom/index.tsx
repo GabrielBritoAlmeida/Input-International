@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react'
 import InputMask from 'react-input-mask'
 
-import FlagB from '../../assets/svgs/brasil.png'
-
 import { SearchString } from './function'
 
 import * as S from './styles'
@@ -15,11 +13,12 @@ export type InputProps = {
     code: string
   }>
   typeInput?: 'default' | 'filled' | 'success' | 'error' | 'disableInput'
+  label?: string
 }
 
 const countryDefault = {
   name: 'Brasil',
-  icon: FlagB,
+  icon: '/img/brasil.png',
   code: '55',
   mask: '(99) 99999-9999'
 }
@@ -27,6 +26,7 @@ const countryDefault = {
 const InputCustom = ({
   list = [countryDefault],
   typeInput = 'default',
+  label = 'Phone Number',
   ...props
 }: InputProps) => {
   const [open, setOpen] = useState(false)
@@ -51,6 +51,9 @@ const InputCustom = ({
     <>
       {open && <S.CloseBox onClick={() => setOpen(false)} />}
       <S.Wrapper {...props}>
+        <S.Label>
+          {label} <span>i</span>
+        </S.Label>
         <S.Container>
           <S.DivFlag onClick={() => setOpen(!open)} typeInput={typeInput}>
             <S.DivFlagAlign typeInput={typeInput}>
@@ -103,7 +106,7 @@ const InputCustom = ({
                     key={item.name}
                     onClick={() => setFlagCurrent(item)}
                   >
-                    <S.Image src={item?.icon} role="img" />
+                    <S.Image src={item?.icon} />
                     {item.name}
                   </S.ListBody>
                 ))}

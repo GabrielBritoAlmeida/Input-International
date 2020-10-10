@@ -1,8 +1,12 @@
 import * as S from './styles'
 
+export type InputProps = {
+  label?: string
+}
+
 const Notification = () => (
   <S.Wrapper>
-    <h1>Notification</h1>
+    <S.Logo src="/img/info2.svg" alt="" />
   </S.Wrapper>
 )
 

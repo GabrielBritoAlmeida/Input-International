@@ -4,11 +4,6 @@ import { DownArrow } from '@styled-icons/boxicons-solid/DownArrow'
 import { Search } from '@styled-icons/heroicons-solid/Search'
 import { InputProps } from '.'
 
-type StyleProps = {
-  src: string
-  typeInput: string
-}
-
 const wrapperModifiers = {
   default: () => css`
     border: 0.2rem solid #4995b5;
@@ -66,6 +61,19 @@ export const Wrapper = styled.div`
       display: none;
     }
   }
+`
+
+export const Label = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 26.5rem;
+  margin-left: 0.5rem;
+  margin-bottom: 0.3rem;
+  font-size: 1.2rem;
+  color: #4995b5;
 `
 
 export const InputPhone = styled.input<InputProps>`
@@ -143,15 +151,12 @@ export const IconArrow = styled(DownArrow)<InputProps>`
   opacity: ${({ typeInput }) => typeInput === 'disableInput' && 0.4};
 `
 
-export const Image = styled.div<StyleProps>`
-  ${({ src, typeInput }) => css`
+export const Image = styled.img<InputProps>`
+  ${({ typeInput }) => css`
     width: 2.4rem;
     height: 1.6rem;
     margin-right: 0.8rem;
 
-    background-image: url(${src});
-    background-position: center center;
-    background-size: cover;
     opacity: ${typeInput === 'disableInput' && 0.4};
   `}
 `

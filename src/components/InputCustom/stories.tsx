@@ -1,11 +1,6 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
 import InputCustom, { InputProps } from '.'
 
-import FlagUSA from '../../assets/svgs/states.png'
-import FlagB from '../../assets/svgs/brasil.png'
-import FlagRU from '../../assets/svgs/kingdom.png'
-import FlagEUA from '../../assets/svgs/emirate.png'
-
 export default {
   title: 'InputCustom',
   component: InputCustom
@@ -28,17 +23,27 @@ Default.args = {
   list: [
     {
       name: 'Brasil',
-      icon: FlagB,
+      icon: '/img/brasil.png',
       code: '55',
       mask: '(99) 99999-9999'
     },
     {
       name: 'United Arab Emirates',
-      icon: FlagEUA,
+      icon: '/img/emirate.png',
       code: '971',
       mask: '999 999 9999'
     },
-    { name: 'United Kingdom', icon: FlagRU, code: '44', mask: '99999 999999' },
-    { name: 'United State', icon: FlagUSA, code: '1', mask: '(999) 999-9999' }
+    {
+      name: 'United Kingdom',
+      icon: '/img/kingdom.png',
+      code: '44',
+      mask: '99999 999999'
+    },
+    {
+      name: 'United State',
+      icon: '/img/states.png',
+      code: '1',
+      mask: '(999) 999-9999'
+    }
   ]
 }
