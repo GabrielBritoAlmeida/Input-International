@@ -24,6 +24,7 @@ const countryDafault = {
 }
 
 const InputCustom = ({ list = [countryDafault] }: InputProps) => {
+  const [open, setOpen] = useState(true)
   const [listCurrent, setListCurrent] = useState([])
   const [flagCurrent, setFlagCurrent] = useState({})
 
@@ -42,49 +43,61 @@ const InputCustom = ({ list = [countryDafault] }: InputProps) => {
   const PreferredList = listCurrent?.length > 0 ? listCurrent : list
 
   return (
-    <S.Wrapper>
-      <S.Container>
-        <S.DivFlag>
-          <S.DivFlagAlign>
-            <S.Image
-              src={flagCurrent?.icon ? flagCurrent?.icon : countryDafault.icon}
-            />
-            <span>
-              +{flagCurrent?.code ? flagCurrent?.code : countryDafault.code}
-            </span>
-          </S.DivFlagAlign>
-          <S.IconArrow />
-        </S.DivFlag>
+    <>
+      {open && <S.CloseBox onClick={() => setOpen(false)} />}
+      <S.Wrapper>
+        <S.Container>
+          <S.DivFlag onClick={() => setOpen(!open)}>
+            <S.DivFlagAlign>
+              <S.Image
+                src={
+                  flagCurrent?.icon ? flagCurrent?.icon : countryDafault.icon
+                }
+              />
+              <span>
+                +{flagCurrent?.code ? flagCurrent?.code : countryDafault.code}
+              </span>
+            </S.DivFlagAlign>
+            <S.IconArrow />
+          </S.DivFlag>
 
-        <InputMask
-          mask={flagCurrent?.mask ? flagCurrent?.mask : countryDafault.mask}
-          maskChar={null}
-          // error={errors.socialNumber}
-        >
-          {(props) => (
-            <S.InputPhone name="phone" placeholder="123..." {...props} />
-          )}
-        </InputMask>
-      </S.Container>
-      <S.Box>
-        <S.AlignSearch>
-          <S.IconSearch />
-          <S.InputSearch
-            name="search"
-            type="text"
-            onChange={(e) => handleSearchInput(e.currentTarget.value)}
-          />
-        </S.AlignSearch>
-        <S.List>
-          {PreferredList.map((item) => (
-            <S.ListBody key={item.name} onClick={() => setFlagCurrent(item)}>
-              <S.Image src={item?.icon} />
-              {item.name}
-            </S.ListBody>
-          ))}
-        </S.List>
-      </S.Box>
-    </S.Wrapper>
+          <InputMask
+            mask={flagCurrent?.mask ? flagCurrent?.mask : countryDafault.mask}
+            maskChar={null}
+            // error={errors.socialNumber}
+          >
+            {(props) => (
+              <S.InputPhone name="phone" placeholder="123..." {...props} />
+            )}
+          </InputMask>
+        </S.Container>
+
+        <S.Box isOpen={open}>
+          <S.AlignSearch>
+            <S.IconSearch />
+            <S.InputSearch
+              name="search"
+              type="text"
+              onChange={(e) => handleSearchInput(e.currentTarget.value)}
+            />
+          </S.AlignSearch>
+
+          <div className="style-scroll">
+            <S.List>
+              {PreferredList.map((item) => (
+                <S.ListBody
+                  key={item.name}
+                  onClick={() => setFlagCurrent(item)}
+                >
+                  <S.Image src={item?.icon} />
+                  {item.name}
+                </S.ListBody>
+              ))}
+            </S.List>
+          </div>
+        </S.Box>
+      </S.Wrapper>
+    </>
   )
 }
 
