@@ -6,4 +6,15 @@ export default {
   component: Notification
 } as Meta
 
-export const Default: Story = () => <Notification />
+export const Default: Story = (args) => <Notification {...args} />
+
+Default.parameters = {
+  backgrounds: {
+    values: [
+      { name: 'input', value: '#000000' },
+      { name: 'inputLight', value: '#fafafa' }
+    ],
+    default: 'input'
+  },
+  layout: 'fullscreen'
+}

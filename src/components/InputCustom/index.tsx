@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react'
 import InputMask from 'react-input-mask'
+import Notification from '../Notification'
 
 import { SearchString } from './function'
 
@@ -18,20 +19,20 @@ export type InputProps = {
 
 const countryDefault = {
   name: 'Brasil',
-  icon: '/img/brasil.png',
+  icon: '/img/flags/brasil.png',
   code: '55',
   mask: '(99) 99999-9999'
 }
 
 const InputCustom = ({
-  list = [countryDefault],
+  list = [],
   typeInput = 'default',
   label = 'Phone Number',
   ...props
 }: InputProps) => {
   const [open, setOpen] = useState(false)
   const [listCurrent, setListCurrent] = useState([])
-  const [flagCurrent, setFlagCurrent] = useState({})
+  const [flagCurrent, setFlagCurrent] = useState(countryDefault)
 
   const handleSearchInput = useCallback(
     (value) => {
@@ -45,33 +46,26 @@ const InputCustom = ({
     [list]
   )
 
-  const PreferredList = listCurrent?.length > 0 ? listCurrent : list
+  const preferredList = listCurrent?.length > 0 ? listCurrent : list
 
   return (
     <>
       {open && <S.CloseBox onClick={() => setOpen(false)} />}
       <S.Wrapper {...props}>
-        <S.Label>
-          {label} <span>i</span>
-        </S.Label>
+        <S.AlignLabel>
+          <S.Label>{label}</S.Label> <Notification />
+        </S.AlignLabel>
         <S.Container>
           <S.DivFlag onClick={() => setOpen(!open)} typeInput={typeInput}>
             <S.DivFlagAlign typeInput={typeInput}>
-              <S.Image
-                typeInput={typeInput}
-                src={
-                  flagCurrent?.icon ? flagCurrent?.icon : countryDefault.icon
-                }
-              />
-              <span>
-                +{flagCurrent?.code ? flagCurrent?.code : countryDefault.code}
-              </span>
+              <S.Image typeInput={typeInput} src={flagCurrent?.icon} />
+              <span>+{flagCurrent?.code}</span>
             </S.DivFlagAlign>
             <S.IconArrow typeInput={typeInput} />
           </S.DivFlag>
 
           <InputMask
-            mask={flagCurrent?.mask ? flagCurrent?.mask : countryDefault.mask}
+            mask={flagCurrent?.mask}
             maskChar={null}
             typeInput={typeInput}
             disableInput={typeInput === 'disableInput' ? true : false}
@@ -100,14 +94,18 @@ const InputCustom = ({
                 />
               </S.AlignSearch>
 
+              {preferredList.length < 1 && (
+                <S.Loading>Carregando lista...</S.Loading>
+              )}
+
               <S.List className="style-scroll">
-                {PreferredList.map((item) => (
+                {preferredList.map((item) => (
                   <S.ListBody
-                    key={item.name}
+                    key={item?.name}
                     onClick={() => setFlagCurrent(item)}
                   >
                     <S.Image src={item?.icon} />
-                    {item.name}
+                    {item?.name}
                   </S.ListBody>
                 ))}
               </S.List>

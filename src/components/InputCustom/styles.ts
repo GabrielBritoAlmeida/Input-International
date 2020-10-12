@@ -63,7 +63,11 @@ export const Wrapper = styled.div`
   }
 `
 
-export const Label = styled.div`
+export const Label = styled.label`
+  display: flex;
+`
+
+export const AlignLabel = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -74,6 +78,8 @@ export const Label = styled.div`
   margin-bottom: 0.3rem;
   font-size: 1.2rem;
   color: #4995b5;
+
+  border: 1px solid blue;
 `
 
 export const InputPhone = styled.input<InputProps>`
@@ -108,8 +114,11 @@ export const Container = styled.div`
   position: relative;
   max-width: 28.4rem;
 `
+type DivFlagAlignProps = {
+  typeInput: string
+}
 
-export const DivFlagAlign = styled.div<InputProps>`
+export const DivFlagAlign = styled.div<DivFlagAlignProps>`
   display: flex;
   flex-direction: row;
   opacity: ${({ typeInput }) => typeInput === 'disableInput' && 0.4};
@@ -119,8 +128,11 @@ export const DivFlagAlign = styled.div<InputProps>`
     font-size: 1.6rem;
   }
 `
+type DivFlagProps = {
+  typeInput: string
+}
 
-export const DivFlag = styled.div<InputProps>`
+export const DivFlag = styled.div<DivFlagProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -143,15 +155,22 @@ export const DivFlag = styled.div<InputProps>`
       opacity: 1;
     `}
 `
+type IconArrowProps = {
+  typeInput: string
+}
 
-export const IconArrow = styled(DownArrow)<InputProps>`
+export const IconArrow = styled(DownArrow)<IconArrowProps>`
   width: 1.6rem;
   height: 0.8rem;
   color: #89c3de;
   opacity: ${({ typeInput }) => typeInput === 'disableInput' && 0.4};
 `
 
-export const Image = styled.img<InputProps>`
+type ImageProps = {
+  typeInput?: string
+}
+
+export const Image = styled.img<ImageProps>`
   ${({ typeInput }) => css`
     width: 2.4rem;
     height: 1.6rem;
@@ -161,7 +180,11 @@ export const Image = styled.img<InputProps>`
   `}
 `
 
-export const Box = styled.div<InputProps>`
+type BoxProps = {
+  isOpen: boolean
+}
+
+export const Box = styled.div<BoxProps>`
   ${({ isOpen }) => css`
     position: fixed;
 
@@ -222,13 +245,24 @@ export const InputSearch = styled.input`
     outline: none;
   }
 `
+export const Loading = styled.p`
+  color: #fff;
+  font-size: 1.6rem;
+  margin-left: 1.6rem;
+  margin-top: 0.8rem;
+`
 
 export const List = styled.ul`
   margin-top: 0.8rem;
   margin-right: 0.8rem;
+  z-index: 10;
 
   height: 11.6rem;
   list-style: none;
+
+  position: absolute;
+  left: 0;
+  right: 0;
 `
 
 export const ListBody = styled.li`
