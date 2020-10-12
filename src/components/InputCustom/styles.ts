@@ -2,7 +2,16 @@ import styled, { css } from 'styled-components'
 
 import { DownArrow } from '@styled-icons/boxicons-solid/DownArrow'
 import { Search } from '@styled-icons/heroicons-solid/Search'
-import { InputProps } from '.'
+
+type WrapperProps = {
+  typeInput?:
+    | 'default'
+    | 'filled'
+    | 'success'
+    | 'warn'
+    | 'error'
+    | 'disableInput'
+}
 
 const wrapperModifiers = {
   default: () => css`
@@ -16,6 +25,10 @@ const wrapperModifiers = {
 
   filled: () => css`
     border: 0.2rem solid #4995b5;
+  `,
+
+  warn: () => css`
+    border: 0.2rem solid #ffc44d;
   `,
 
   error: () => css`
@@ -62,27 +75,24 @@ export const Wrapper = styled.div`
     }
   }
 `
-
-export const Label = styled.label`
-  display: flex;
+export const Label = styled.label<WrapperProps>`
+  font-size: 1.2rem;
+  color: #4995b5;
+  opacity: ${({ typeInput }) => typeInput === 'disableInput' && 0.4};
 `
 
 export const AlignLabel = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
 
-  max-width: 26.5rem;
+  max-width: 27rem;
   margin-left: 0.5rem;
   margin-bottom: 0.3rem;
-  font-size: 1.2rem;
-  color: #4995b5;
-
-  border: 1px solid blue;
 `
 
-export const InputPhone = styled.input<InputProps>`
+export const InputPhone = styled.input<WrapperProps>`
   ${({ typeInput }) => css`
     width: 28rem;
     height: 4.8rem;
@@ -114,11 +124,8 @@ export const Container = styled.div`
   position: relative;
   max-width: 28.4rem;
 `
-type DivFlagAlignProps = {
-  typeInput: string
-}
 
-export const DivFlagAlign = styled.div<DivFlagAlignProps>`
+export const DivFlagAlign = styled.div<WrapperProps>`
   display: flex;
   flex-direction: row;
   opacity: ${({ typeInput }) => typeInput === 'disableInput' && 0.4};
@@ -128,11 +135,8 @@ export const DivFlagAlign = styled.div<DivFlagAlignProps>`
     font-size: 1.6rem;
   }
 `
-type DivFlagProps = {
-  typeInput: string
-}
 
-export const DivFlag = styled.div<DivFlagProps>`
+export const DivFlag = styled.div<WrapperProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -155,11 +159,8 @@ export const DivFlag = styled.div<DivFlagProps>`
       opacity: 1;
     `}
 `
-type IconArrowProps = {
-  typeInput: string
-}
 
-export const IconArrow = styled(DownArrow)<IconArrowProps>`
+export const IconArrow = styled(DownArrow)<WrapperProps>`
   width: 1.6rem;
   height: 0.8rem;
   color: #89c3de;
@@ -186,7 +187,7 @@ type BoxProps = {
 
 export const Box = styled.div<BoxProps>`
   ${({ isOpen }) => css`
-    position: fixed;
+    position: absolute;
 
     width: 28rem;
     height: 17.6rem;

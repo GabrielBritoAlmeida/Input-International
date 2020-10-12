@@ -6,7 +6,11 @@ export default {
   component: Notification
 } as Meta
 
-export const Default: Story = (args) => <Notification {...args} />
+export const Default: Story = (args) => (
+  <div style={{ marginTop: 150 }}>
+    <Notification {...args} />
+  </div>
+)
 
 Default.parameters = {
   backgrounds: {

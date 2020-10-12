@@ -13,8 +13,17 @@ export type InputProps = {
     mask: string
     code: string
   }>
-  typeInput?: 'default' | 'filled' | 'success' | 'error' | 'disableInput'
+  typeInput?:
+    | 'default'
+    | 'filled'
+    | 'success'
+    | 'warn'
+    | 'error'
+    | 'disableInput'
   label?: string
+  errorCharacter?: boolean
+  errorNumSimbo?: boolean
+  errorEmail?: boolean
 }
 
 const countryDefault = {
@@ -28,6 +37,9 @@ const InputCustom = ({
   list = [],
   typeInput = 'default',
   label = 'Phone Number',
+  errorCharacter,
+  errorNumSimbo,
+  errorEmail,
   ...props
 }: InputProps) => {
   const [open, setOpen] = useState(false)
@@ -53,7 +65,13 @@ const InputCustom = ({
       {open && <S.CloseBox onClick={() => setOpen(false)} />}
       <S.Wrapper {...props}>
         <S.AlignLabel>
-          <S.Label>{label}</S.Label> <Notification />
+          <S.Label typeInput={typeInput}>{label}</S.Label>
+          <Notification
+            typeInfo={typeInput}
+            errorCharacter={errorCharacter}
+            errorNumSimbo={errorNumSimbo}
+            errorEmail={errorEmail}
+          />
         </S.AlignLabel>
         <S.Container>
           <S.DivFlag onClick={() => setOpen(!open)} typeInput={typeInput}>
